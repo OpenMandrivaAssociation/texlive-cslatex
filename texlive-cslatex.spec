@@ -1,3 +1,9 @@
+# revision 23409
+# category Package
+# catalog-ctan /macros/cstex/base/cslatex.tar.gz
+# catalog-date 2009-09-24 20:53:04 +0200
+# catalog-license gpl
+# catalog-version undef
 Name:		texlive-cslatex
 Version:	20090924
 Release:	1
@@ -98,6 +104,7 @@ TeXLive cslatex package.
 %doc %{_texmfdistdir}/source/cslatex/base/cslatex.dtx
 %doc %{_texmfdistdir}/source/cslatex/base/cslatex.ins
 %doc %{_texmfdistdir}/source/cslatex/base/cslatex.txt
+%doc %{_tlpkgobjdir}/*.tlpobj
 
 #-----------------------------------------------------------------------
 %prep
@@ -108,6 +115,8 @@ TeXLive cslatex package.
 %install
 mkdir -p %{buildroot}%{_datadir}
 cp -fpar texmf-dist %{buildroot}%{_datadir}
+mkdir -p %{buildroot}%{_tlpkgobjdir}
+cp -fpa tlpkg/tlpobj/*.tlpobj %{buildroot}%{_tlpkgobjdir}
 mkdir -p %{buildroot}%{_texmf_fmtutil_d}
 cat > %{buildroot}%{_texmf_fmtutil_d}/cslatex <<EOF
 cslatex pdftex - -etex -translate-file=cp227.tcx cslatex.ini
