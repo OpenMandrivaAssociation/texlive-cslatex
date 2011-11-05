@@ -16,13 +16,15 @@ Source1:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/cslatex.doc.tar.x
 Source2:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/cslatex.source.tar.xz
 BuildArch:	noarch
 BuildRequires:	texlive-tlpkg
-Requires(post):	texlive-tlpkg
+Requires(pre):	texlive-tlpkg
+Requires(post):	texlive-kpathsea
+Requires(post):	texlive-tetex
+Requires(post):	texlive-csplain
 Requires:	texlive-latex
 Requires:	texlive-cslatex.bin
 Conflicts:	texlive-texmf <= 20110705-3
 Conflicts:	texlive-doc <= 20110705-3
 Conflicts:	texlive-source <= 20110705-3
-Requires(post):	texlive-tetex
 
 %description
 TeXLive cslatex package.
@@ -32,8 +34,8 @@ TeXLive cslatex package.
     %_texmf_mktexlsr_pre
 
 %post
-    %_texmf_fmtutil_post
     %_texmf_mktexlsr_post
+    %_texmf_fmtutil_post
 
 %preun
     if [ $1 -eq 0 ]; then
@@ -43,8 +45,8 @@ TeXLive cslatex package.
 
 %postun
     if [ $1 -eq 0 ]; then
-	%_texmf_fmtutil_post
 	%_texmf_mktexlsr_post
+	%_texmf_fmtutil_post
     fi
 
 #-----------------------------------------------------------------------
