@@ -22,31 +22,16 @@ Requires(post):	texlive-tetex
 Requires(post):	texlive-csplain
 Requires:	texlive-latex
 Requires:	texlive-cslatex.bin
-Conflicts:	texlive-texmf <= 20110705-3
-Conflicts:	texlive-doc <= 20110705-3
-Conflicts:	texlive-source <= 20110705-3
 
 %description
 TeXLive cslatex package.
 
-%pre
-    %_texmf_fmtutil_pre
-    %_texmf_mktexlsr_pre
-
 %post
-    %_texmf_mktexlsr_post
-    %_texmf_fmtutil_post
-
-%preun
-    if [ $1 -eq 0 ]; then
-	%_texmf_fmtutil_pre
-	%_texmf_mktexlsr_pre
-    fi
+    %{_sbindir}/texlive.post
 
 %postun
     if [ $1 -eq 0 ]; then
-	%_texmf_mktexlsr_post
-	%_texmf_fmtutil_post
+	%{_sbindir}/texlive.post
     fi
 
 #-----------------------------------------------------------------------
@@ -106,7 +91,6 @@ TeXLive cslatex package.
 %doc %{_texmfdistdir}/source/cslatex/base/cslatex.dtx
 %doc %{_texmfdistdir}/source/cslatex/base/cslatex.ins
 %doc %{_texmfdistdir}/source/cslatex/base/cslatex.txt
-%doc %{_tlpkgobjdir}/*.tlpobj
 
 #-----------------------------------------------------------------------
 %prep
@@ -117,8 +101,6 @@ TeXLive cslatex package.
 %install
 mkdir -p %{buildroot}%{_datadir}
 cp -fpar texmf-dist %{buildroot}%{_datadir}
-mkdir -p %{buildroot}%{_tlpkgobjdir}
-cp -fpa tlpkg/tlpobj/*.tlpobj %{buildroot}%{_tlpkgobjdir}
 mkdir -p %{buildroot}%{_texmf_fmtutil_d}
 cat > %{buildroot}%{_texmf_fmtutil_d}/cslatex <<EOF
 cslatex pdftex - -etex -translate-file=cp227.tcx cslatex.ini
