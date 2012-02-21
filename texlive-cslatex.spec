@@ -6,7 +6,7 @@
 # catalog-version undef
 Name:		texlive-cslatex
 Version:	20090924
-Release:	2
+Release:	3
 Summary:	LaTeX support for Czech/Slovak typesetting
 Group:		Publishing
 URL:		http://www.ctan.org/tex-archive/macros/cstex/base/cslatex.tar.gz
@@ -103,6 +103,8 @@ mkdir -p %{buildroot}%{_datadir}
 cp -fpar texmf-dist %{buildroot}%{_datadir}
 mkdir -p %{buildroot}%{_texmf_fmtutil_d}
 cat > %{buildroot}%{_texmf_fmtutil_d}/cslatex <<EOF
+#
+# from cslatex:
 cslatex pdftex - -etex -translate-file=cp227.tcx cslatex.ini
 pdfcslatex pdftex - -etex -translate-file=cp227.tcx cslatex.ini
 EOF
