@@ -108,3 +108,21 @@ cat > %{buildroot}%{_texmf_fmtutil_d}/cslatex <<EOF
 cslatex pdftex - -etex -translate-file=cp227.tcx cslatex.ini
 pdfcslatex pdftex - -etex -translate-file=cp227.tcx cslatex.ini
 EOF
+
+
+%changelog
+* Tue Feb 21 2012 Paulo Andrade <pcpa@mandriva.com.br> 20090924-3
++ Revision: 778431
+- Rebuild after tlpobj2spec.pl bug correction.
+
+* Tue Jan 03 2012 Paulo Andrade <pcpa@mandriva.com.br> 20090924-2
++ Revision: 750656
+- Rebuild to reduce used resources
+
+* Sat Nov 05 2011 Paulo Andrade <pcpa@mandriva.com.br> 20090924-1
++ Revision: 718171
+- texlive-cslatex
+- texlive-cslatex
+- texlive-cslatex
+- texlive-cslatex
+
