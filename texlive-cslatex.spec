@@ -6,7 +6,7 @@
 # catalog-version undef
 Name:		texlive-cslatex
 Version:	20090924
-Release:	3
+Release:	4
 Summary:	LaTeX support for Czech/Slovak typesetting
 Group:		Publishing
 URL:		http://www.ctan.org/tex-archive/macros/cstex/base/cslatex.tar.gz
