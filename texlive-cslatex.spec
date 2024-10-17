@@ -3,7 +3,7 @@ Version:	62387
 Release:	2
 Summary:	LaTeX support for Czech/Slovak typesetting
 Group:		Publishing
-URL:		http://www.ctan.org/tex-archive/macros/cstex/base/cslatex.tar.gz
+URL:		https://www.ctan.org/tex-archive/macros/cstex/base/cslatex.tar.gz
 License:	GPL
 Source0:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/cslatex.r%{version}.tar.xz
 Source1:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/cslatex.source.r%{version}.tar.xz
