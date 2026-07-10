@@ -1,93 +1,34 @@
-Name:		texlive-cslatex
-Version:	62387
-Release:	2
+%global tl_name cslatex
+%global tl_revision 79618
+
+Name:		texlive-%{tl_name}
+Version:	%{tl_revision}
+Release:	1
 Summary:	LaTeX support for Czech/Slovak typesetting
 Group:		Publishing
 URL:		https://www.ctan.org/tex-archive/macros/cstex/base/cslatex.tar.gz
-License:	GPL
-Source0:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/cslatex.r%{version}.tar.xz
-Source1:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/cslatex.source.r%{version}.tar.xz
+License:	gpl
+Source0:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/cslatex.r%{tl_revision}.tar.xz
+Source1:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/cslatex.source.r%{tl_revision}.tar.xz
 BuildArch:	noarch
+BuildSystem:	texlive
 BuildRequires:	texlive-tlpkg
-Requires(pre):	texlive-tlpkg
-Requires(post):	texlive-kpathsea
-Requires(post):	texlive-tetex
-Requires(post):	texlive-csplain
-Requires:	texlive-latex
-Requires:	texlive-cslatex.bin
+%texlive_base_requires
+Requires:	texlive(atbegshi)
+Requires:	texlive(atveryend)
+Requires:	texlive(cm)
+Requires:	texlive(csplain)
+Requires:	texlive(everyshi)
+Requires:	texlive(firstaid)
+Requires:	texlive(hyphen-base)
+Requires:	texlive(l3kernel)
+Requires:	texlive(l3packages)
+Requires:	texlive(latex)
+Requires:	texlive(latex-fonts)
+Requires:	texlive(tex-ini-files)
+Requires:	texlive(unicode-data)
+Provides:	texlive(%{tl_name}) = %{tl_revision}
 
 %description
-TeXLive cslatex package.
+LaTeX support for Czech/Slovak typesetting
 
-%post
-%{_sbindir}/texlive.post
-
-%postun
-if [ $1 -eq 0 ]; then
-	%{_sbindir}/texlive.post
-fi
-
-#-----------------------------------------------------------------------
-%files
-%{_texmfdistdir}/tex/cslatex/base/cslatex.ini
-%{_texmfdistdir}/tex/cslatex/base/czech.sty
-%{_texmfdistdir}/tex/cslatex/base/fonttext.cfg
-%{_texmfdistdir}/tex/cslatex/base/hyphen.cfg
-%{_texmfdistdir}/tex/cslatex/base/il2cmdh.fd
-%{_texmfdistdir}/tex/cslatex/base/il2cmfib.fd
-%{_texmfdistdir}/tex/cslatex/base/il2cmfr.fd
-%{_texmfdistdir}/tex/cslatex/base/il2cmr.fd
-%{_texmfdistdir}/tex/cslatex/base/il2cmss.fd
-%{_texmfdistdir}/tex/cslatex/base/il2cmtt.fd
-%{_texmfdistdir}/tex/cslatex/base/il2cmvtt.fd
-%{_texmfdistdir}/tex/cslatex/base/il2enc.def
-%{_texmfdistdir}/tex/cslatex/base/il2lcmss.fd
-%{_texmfdistdir}/tex/cslatex/base/il2lcmtt.fd
-%{_texmfdistdir}/tex/cslatex/base/slovak.sty
-%{_texmfdistdir}/tex/cslatex/cspsfonts/cspsfont.il2
-%{_texmfdistdir}/tex/cslatex/cspsfonts/cspsfont.tex
-%{_texmfdistdir}/tex/cslatex/cspsfonts/cspsfont.xl2
-%{_texmfdistdir}/tex/cslatex/cspsfonts/il2pag.fd
-%{_texmfdistdir}/tex/cslatex/cspsfonts/il2pbk.fd
-%{_texmfdistdir}/tex/cslatex/cspsfonts/il2pcr.fd
-%{_texmfdistdir}/tex/cslatex/cspsfonts/il2phv.fd
-%{_texmfdistdir}/tex/cslatex/cspsfonts/il2phvn.fd
-%{_texmfdistdir}/tex/cslatex/cspsfonts/il2pnc.fd
-%{_texmfdistdir}/tex/cslatex/cspsfonts/il2ppl.fd
-%{_texmfdistdir}/tex/cslatex/cspsfonts/il2ptm.fd
-%{_texmfdistdir}/tex/cslatex/cspsfonts/il2pzc.fd
-%{_texmfdistdir}/tex/cslatex/cspsfonts/nhelvet.sty
-%{_texmfdistdir}/tex/cslatex/cspsfonts/ntimes.sty
-%{_texmfdistdir}/tex/cslatex/cspsfonts/xl2pag.fd
-%{_texmfdistdir}/tex/cslatex/cspsfonts/xl2pbk.fd
-%{_texmfdistdir}/tex/cslatex/cspsfonts/xl2pcr.fd
-%{_texmfdistdir}/tex/cslatex/cspsfonts/xl2phv.fd
-%{_texmfdistdir}/tex/cslatex/cspsfonts/xl2phvn.fd
-%{_texmfdistdir}/tex/cslatex/cspsfonts/xl2pnc.fd
-%{_texmfdistdir}/tex/cslatex/cspsfonts/xl2ppl.fd
-%{_texmfdistdir}/tex/cslatex/cspsfonts/xl2ptm.fd
-%{_texmfdistdir}/tex/cslatex/cspsfonts/xl2pzc.fd
-%_texmf_fmtutil_d/cslatex
-#- source
-%doc %{_texmfdistdir}/source/cslatex/base/cslatex.dtx
-%doc %{_texmfdistdir}/source/cslatex/base/cslatex.ins
-
-%doc %{_texmfdistdir}/source/cslatex/cspsfonts/cspsfont.doc
-%doc %{_texmfdistdir}/source/cslatex/cspsfonts/cspsfont.drv
-
-#-----------------------------------------------------------------------
-%prep
-%autosetup -p1 -c -a1
-
-%build
-
-%install
-mkdir -p %{buildroot}%{_datadir}
-cp -fpar texmf-dist %{buildroot}%{_datadir}
-mkdir -p %{buildroot}%{_texmf_fmtutil_d}
-cat > %{buildroot}%{_texmf_fmtutil_d}/cslatex <<EOF
-#
-# from cslatex:
-cslatex pdftex - -etex cslatex.ini
-pdfcslatex pdftex - -etex cslatex.ini
-EOF
