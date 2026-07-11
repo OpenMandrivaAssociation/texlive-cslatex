@@ -12,8 +12,6 @@ Source0:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/cslatex.r%{tl_re
 Source1:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/cslatex.source.r%{tl_revision}.tar.xz
 BuildArch:	noarch
 BuildSystem:	texlive
-BuildRequires:	texlive-tlpkg
-%texlive_base_requires
 Requires:	texlive(atbegshi)
 Requires:	texlive(atveryend)
 Requires:	texlive(cm)
